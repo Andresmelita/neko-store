@@ -3,8 +3,8 @@
 </script>
 
 <template>
-    <div class="p-t-[200px]">
-        <h1>Resumen de ventas</h1>
+    <div class="pt-32 ">
+        <h1 class="text-4xl font-black my-10">Resumen de ventas</h1>
     </div>
 </template>
 
