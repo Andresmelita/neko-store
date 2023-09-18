@@ -15,8 +15,17 @@ const formData = reactive({
     image: ''
 })
 
-const submitHandler = data => {
-    console.log(data)
+const submitHandler = async data => {
+    // console.log(data)
+    const { image, ...values } = data
+    try {
+        await products.createProduct({
+            ...values,
+            image: url.value
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 </script>
@@ -43,13 +52,13 @@ const submitHandler = data => {
                     <FormKit type="select" label="Categoría" name="category" placeholder="Categoría del Producto"
                         validation="required"
                         :validation-messages="{ required: 'La categoría del producto es obligatorio' }"
-                        :options="products.categoryOptions" v-model.trim ="formData.category"/>
+                        :options="products.categoryOptions" v-model.trim="formData.category" />
                     <FormKit type="number" label="Precio" name="price" placeholder="Precio del Producto"
                         validation="required" :validation-messages="{ required: 'El precio del producto es obligatorio' }"
-                        min="0" step="10" v-model.number ="formData.price"/>
+                        min="0" step="10" v-model.number="formData.price" />
                     <FormKit type="number" label="Disponibles" name="availability" placeholder="Cantidad disponible"
                         validation="required" :validation-messages="{ required: 'La cantidad de productos es obligatorio' }"
-                        min="1" v-model.number ="formData.availability"/>
+                        min="1" v-model.number="formData.availability" />
                 </FormKit>
             </div>
         </div>
