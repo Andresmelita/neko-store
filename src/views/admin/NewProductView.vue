@@ -1,11 +1,13 @@
 <script setup>
 import Link from '../../components/Link.vue'
+import { useRouter } from 'vue-router'
 import useImage from '../../composables/useImage'
 import { reactive } from 'vue';
 import { useProductsStore } from '../../stores/products'
 
 const { url, isImageUploaded, onFileChange } = useImage()
 const products = useProductsStore()
+const router = useRouter()
 
 const formData = reactive({
     name: '',
@@ -23,6 +25,7 @@ const submitHandler = async data => {
             ...values,
             image: url.value
         })
+        router.push({name:'products'})
     } catch (error) {
         console.log(error);
     }
