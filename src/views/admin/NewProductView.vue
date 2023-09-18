@@ -2,7 +2,7 @@
     import Link from '../../components/Link.vue'
     import useImage from '../../composables/useImage'
 
-    const {onFileChange } = useImage()
+    const {url, isImageUploaded ,onFileChange } = useImage()
 </script>
 <template>
     <div>
@@ -12,12 +12,16 @@
         <h1 class="text-4xl font-black my-10">Nuevo Producto</h1>
         <div class="flex justify-center bg-white shadow">
             <div class="mt-10 p-10 w-full 2xl:w-2/4">
-                <FormKit type="form" submit-label="Agregar Producto">
+                <FormKit type="form" submit-label="Agregar Producto" incomplete-messagge="No se pudo enviar revisar mensajes">
                     <FormKit type="text" label="Nombre" name="name" placeholder="Nombre del Producto" validation="required"
                         :validation-messages="{ required: 'El nombre del producto es obligatorio' }" />
                     <FormKit type="file" label="Imagen Producto" name="image" placeholder="Imagen del Producto"
                         validation="required" :validation-messages="{ required: 'La imagen del producto es obligatorio' }"
                         accept=".jpg" multiple="false" @change="onFileChange"/>
+                    <div v-if="isImageUploaded">
+                        <p class="font-black"></p>
+                        <img :src="isImageUploaded" alt="nueva imagen producto" class="w-32"/>
+                    </div>
                     <FormKit type="select" label="Categoría" name="category" placeholder="Categoría del Producto"
                         validation="required" :validation-messages="{ required: 'La categoría del producto es obligatorio' }"
                         :options="[1,2,3]" />
