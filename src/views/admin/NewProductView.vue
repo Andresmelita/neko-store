@@ -1,6 +1,7 @@
 <script setup>
 import Link from '../../components/Link.vue'
 import useImage from '../../composables/useImage'
+import { reactive } from 'vue';
 import { useProductsStore } from '../../stores/products'
 
 const { url, isImageUploaded, onFileChange } = useImage()
@@ -42,7 +43,7 @@ const submitHandler = data => {
                     <FormKit type="select" label="Categoría" name="category" placeholder="Categoría del Producto"
                         validation="required"
                         :validation-messages="{ required: 'La categoría del producto es obligatorio' }"
-                        :options="[1, 2, 3]" v-model.trim ="formData.category"/>
+                        :options="products.categoryOptions" v-model.trim ="formData.category"/>
                     <FormKit type="number" label="Precio" name="price" placeholder="Precio del Producto"
                         validation="required" :validation-messages="{ required: 'El precio del producto es obligatorio' }"
                         min="0" step="10" v-model.number ="formData.price"/>
