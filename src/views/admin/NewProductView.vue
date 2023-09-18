@@ -1,5 +1,8 @@
 <script setup>
-import Link from '../../components/Link.vue'
+    import Link from '../../components/Link.vue'
+    import useImage from '../../composables/useImage'
+
+    const {onFileChange } = useImage()
 </script>
 <template>
     <div>
@@ -14,7 +17,7 @@ import Link from '../../components/Link.vue'
                         :validation-messages="{ required: 'El nombre del producto es obligatorio' }" />
                     <FormKit type="file" label="Imagen Producto" name="image" placeholder="Imagen del Producto"
                         validation="required" :validation-messages="{ required: 'La imagen del producto es obligatorio' }"
-                        accept=".jpg" multiple="false" />
+                        accept=".jpg" multiple="false" @change="onFileChange"/>
                     <FormKit type="select" label="Categoría" name="category" placeholder="Categoría del Producto"
                         validation="required" :validation-messages="{ required: 'La categoría del producto es obligatorio' }"
                         :options="[1,2,3]" />
