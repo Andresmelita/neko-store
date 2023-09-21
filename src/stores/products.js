@@ -14,7 +14,10 @@ export const useProductsStore = defineStore('products', () => {
     ]
 
     const q = query(
-        collection(db, 'products')
+        collection(db, 'products'),
+        //where('category', '==', 3)
+        //limit(10)
+        orderBy('name', 'asc')
     )
     const productsCollection = useCollection(q)
 
@@ -32,10 +35,13 @@ export const useProductsStore = defineStore('products', () => {
         return options
     })
 
+    const noResults = computed(()=> productsCollection.value.length === 0)
+
     return {
         createProduct,
         productsCollection,
-        categoryOptions
+        categoryOptions,
+        noResults
     }
 })
 
