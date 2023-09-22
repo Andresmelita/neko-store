@@ -13,6 +13,8 @@ const db = useFirestore()
 const docRef = doc(db, 'products', route.params.id)
 const product = useDocument(docRef)
 
+
+
 const { onFileChange, url, isImageUploaded } = useImage()
 const products = useProductsStore()
 const formData = reactive({
