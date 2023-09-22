@@ -9,14 +9,14 @@ import useImage from '@/composables/useImage'
 
 // Consultar firestore
 const route = useRoute()
+const router = useRouter()
 const db = useFirestore()
 const docRef = doc(db, 'products', route.params.id)
 const product = useDocument(docRef)
 
-
-
 const { onFileChange, url, isImageUploaded } = useImage()
 const products = useProductsStore()
+
 const formData = reactive({
     name: '',
     category: '',
@@ -24,6 +24,18 @@ const formData = reactive({
     availability: '',
     image: ''
 })
+
+watch(product, (product) => {
+    if (!product) {
+        router.push({ name: 'products' })
+    }
+    formData.name = product.name
+    formData.price = product.price
+    formData.category = product.category
+    formData.image = product.image
+    formData.availability = product.availability
+})
+
 </script>
 
 <template>
