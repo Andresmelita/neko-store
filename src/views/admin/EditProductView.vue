@@ -3,9 +3,9 @@ import { watch, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { doc } from 'firebase/firestore'
 import { useFirestore, useDocument } from 'vuefire'
-import Link from '@/components/Link.vue';
-import { useProductsStore } from '@/stores/products';
-import useImage from '@/composables/useImage'
+import Link from '../../components/Link.vue';
+import { useProductsStore } from '../../stores/products';
+import useImage from '../../composables/useImage'
 
 // Consultar firestore
 const route = useRoute()
@@ -31,6 +31,14 @@ watch(product, (product) => {
     }
     Object.assign((formData), product)
 })
+
+const submitHandler = async data => {
+    try {
+        await products.updateProduct(docRef, data)
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 </script>
 
