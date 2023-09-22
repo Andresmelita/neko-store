@@ -6,6 +6,13 @@ import { useFirestore, useDocument } from 'vuefire'
 import Link from '@/components/Link.vue';
 import { useProductsStore } from '@/stores/products';
 import useImage from '@/composables/useImage'
+
+// Consultar firestore
+const route = useRoute()
+const db = useFirestore()
+const docRef = doc(db, 'products', route.params.id)
+const product = useDocument(docRef)
+
 const { onFileChange, url, isImageUploaded } = useImage()
 const products = useProductsStore()
 const formData = reactive({
